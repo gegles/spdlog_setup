@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## v1.1.0
+- Complete revamp
+- Conan support
 
 ## v0.3.2
 
