@@ -11,6 +11,10 @@ class SpdlogSetupConan(ConanFile):
     no_copy_source = True
     generators = "CMakeToolchain", "CMakeDeps"
 
+    def config_options(self):
+        self.options['fmt'].header_only = True
+        self.options['spdlog'].header_only = True
+
     def requirements(self):
         self.requires("catch2/3.0.1")
         self.requires("cpptoml/0.1.1")

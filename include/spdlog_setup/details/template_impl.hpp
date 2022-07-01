@@ -33,9 +33,6 @@ is_valid_var_char(const char c) -> bool
 inline auto
 render(const std::string& tmpl, const std::unordered_map<std::string, std::string>& m) -> std::string
 {
-  // fmt
-  using fmt::format;
-
   // std
   using std::stringstream;
 
@@ -80,7 +77,7 @@ render(const std::string& tmpl, const std::unordered_map<std::string, std::strin
         break;
       default:
         if (!is_valid_var_char(c)) {
-          throw setup_error(format("Found invalid char '{}' in variable interpolation", c));
+          throw setup_error(fmt::format("Found invalid char '{}' in variable interpolation", c));
         }
         state = render_state::var_name_start;
         var_buffer << c;
@@ -98,7 +95,7 @@ render(const std::string& tmpl, const std::unordered_map<std::string, std::strin
         break;
       default:
         if (!is_valid_var_char(c)) {
-          throw setup_error(format("Found invalid char '{}' in variable name", c));
+          throw setup_error(fmt::format("Found invalid char '{}' in variable name", c));
         }
         var_buffer << c;
         break;
@@ -114,7 +111,7 @@ render(const std::string& tmpl, const std::unordered_map<std::string, std::strin
         state = render_state::var_ending;
         break;
       default:
-        throw setup_error(format("Found invalid char '{}' after variable name '{}'", c, var_buffer.str()));
+        throw setup_error(fmt::format("Found invalid char '{}' after variable name '{}'", c, var_buffer.str()));
       }
       break;
 
@@ -131,7 +128,7 @@ render(const std::string& tmpl, const std::unordered_map<std::string, std::strin
         break;
       }
       default:
-        throw setup_error(format("Found invalid char '{}' when expecting '}}'", c));
+        throw setup_error(fmt::format("Found invalid char '{}' when expecting '}}'", c));
       }
       break;
 
