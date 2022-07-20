@@ -18,7 +18,7 @@ find_package(cpptoml REQUIRED CONFIG)
 # spdlog_setup
 add_library(spdlog_setup INTERFACE)
 target_include_directories(spdlog_setup INTERFACE include)
-target_link_libraries(spdlog_setup INTERFACE spdlog::spdlog_header_only cpptoml::cpptoml fmt::fmt)
+target_link_libraries(spdlog_setup INTERFACE spdlog::spdlog_header_only cpptoml::cpptoml fmt::fmt-header-only)
 
 # spdlog_setup_sources (for IDEs)
 if (XCODE OR MSVC)
