@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from conans import CMake
-from conan import ConanFile
+from conans import ConanFile, CMake
 
 class SpdlogSetupConan(ConanFile):
     name = 'spdlog_setup'
@@ -15,13 +14,13 @@ class SpdlogSetupConan(ConanFile):
         self.options['fmt'].header_only = True
         self.options['spdlog'].header_only = True
 
+    def build_requirements(self):
+        self.tool_requires('catch2/[>=3.0.1]')
+
     def requirements(self):
         self.requires('cpptoml/0.1.1')
         self.requires('spdlog/1.10.0')
-        self.requires('fmt/8.1.1')
-
-    def build_requirements(self):
-        self.tool_requires('catch2/3.1.0')
+        self.requires('fmt/[>=8.1.1]')
 
     def build(self): # this is not building a library, just tests
         cmake = CMake(self)
