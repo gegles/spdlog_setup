@@ -1,9 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
 
-# Conan
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
-
 project(spdlog_setup
     LANGUAGES CXX)
 

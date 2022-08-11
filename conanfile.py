@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from conan import ConanFile
-from conan.tools.cmake import CMake
+from conan.tools.cmake import CMake, cmake_layout
 from conan.tools.build import check_min_cppstd
+
 
 class SpdlogSetupConan(ConanFile):
     name = "spdlog_setup"
@@ -28,10 +29,13 @@ class SpdlogSetupConan(ConanFile):
     def requirements(self):
         self.requires("cpptoml/0.1.1")
         self.requires("spdlog/1.10.0")
-        self.requires("fmt/[>=8.1.1]")
+        self.requires("fmt/8.1.1")
 
     def validate(self):
         check_min_cppstd(self, 17)
+
+    def layout(self):
+        cmake_layout(self)
 
     def build(self):
         cmake = CMake(self)
