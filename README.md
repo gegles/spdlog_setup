@@ -3,46 +3,17 @@
 ## Overview
 
 Header-only [`spdlog`](https://github.com/gabime/spdlog) file-based setup
-library for convenience in initializing spdlog. Inspired by
-[`spdlog-config`](https://github.com/objectx/spdlog-config) for using
+library for convenience in initializing spdlog. It is using
 [`TOML`](https://github.com/toml-lang/toml) configuration, a format that is
 simple and easy-to-read.
 
-[![Build Status](https://travis-ci.org/guangie88/spdlog_setup.svg?branch=master)](https://travis-ci.org/guangie88/spdlog_setup)
-[![Build status](https://ci.appveyor.com/api/projects/status/srek5xih80104eds/branch/master?svg=true)](https://ci.appveyor.com/project/guangie88/spdlog-setup/branch/master)
-[![codecov](https://codecov.io/gh/guangie88/spdlog_setup/branch/master/graph/badge.svg)](https://codecov.io/gh/guangie88/spdlog_setup)
-
 ## Requirements
 
-Requires at least `CMake 3.3`, `g++-4.9` for Linux, or `MSVC2015` with `MSBuild`
-for Windows, providing sufficient C++11 features.
-
-`g++-4.8` will notably fail because of the missing `std::regex` implementation.
-`MSVC2013` will fail too as it does not accept `noexcept`, which is used in some
-of the functions.
-
-Tested against:
-
-- `g++-4.9`
-- `g++-5`
-- `g++-6`
-- `g++-7`
-- `g++-8`
-- `clang-3.6`
-- `clang-3.7`
-- `clang-3.8`
-- `clang-3.9`
-- `clang-4.0`
-- `clang-5.0`
-- `clang-6.0`
-- `clang-7`
-- `cl` (v140 / MSVC2015)
-- `cl` (v141 / MSVC2017)
+Requires at least `Conan v1.59` or `Conan v2.x`
 
 ## Features
 
-- Header-only (check [`How to Install`](#how-to-install) to extract out the
-  header files).
+- Header-only
 - Initialization of `spdlog` sinks, patterns and loggers based on `TOML`
   configuration file.
 - Tag replacement (e.g. "{tagname}-log.txt") within the `TOML` configuration
@@ -53,17 +24,6 @@ Tested against:
 
 See [CHANGELOG.md](./CHANGELOG.md) for more details.
 
-## Repository Checkout
-
-Since this repository has other git-based dependencies as `git` submodules, use
-the command:
-`git clone --recursive https://github.com/guangie88/spdlog_setup.git` in order
-to clone all the submodule dependencies.
-
-If the repository has already been cloned without the submodules, then instead
-run: `git submodule update --init --recursive` in order to clone all the
-submodule dependencies.
-
 ## Dependencies
 
 This repository uses the following external dependencies directly:
@@ -71,76 +31,12 @@ This repository uses the following external dependencies directly:
 - [`Catch`](https://github.com/philsquared/Catch) (only for unit-tests, not
   included in installation)
 - [`spdlog`](https://github.com/gabime/spdlog)
-
-In addition, the following dependencies are inlined as part of the include:
-
 - [`cpptoml`](https://github.com/skystrife/cpptoml)
 - [`fmt`](https://github.com/fmtlib/fmt.git)
 
 ## How to Build
 
-This guide prefers a `CMake` out-of-source build style. For build with unit
-tests, add `-DSPDLOG_SETUP_INCLUDE_UNIT_TESTS=ON` during the CMake
-configuration.
-
-## How to Install
-
-If a recent enough `spdlog` is already available, and unit tests are not to be
-run, it is possible to just copy the `spdlog_setup` directory within `include`
-into another solution for header-only include, as long as `spdlog` can be found
-in that solution.
-
-If `spdlog` is not available, the installation step of `CMake` can copy out the
-entire list of header files required for `spdlog_setup` into the installation
-directory, including `spdlog`. To change the installation directory, add
-`-DCMAKE_INSTALL_PREFIX=<path-to-install>` during the CMake configuration.
-
-### Linux (`GCC`)
-
-In the root directory after `git` cloning:
-
-#### Debug without Installation
-
-- `mkdir build-debug`
-- `cd build-debug`
-- `cmake .. -DCMAKE_BUILD_TYPE=Debug -DSPDLOG_SETUP_INCLUDE_UNIT_TESTS=ON`
-- `cmake --build .`
-
-Now the unit test executable should be compiled and residing in
-`build-debug/spdlog_setup_unit_test`.
-
-#### Release with Installation
-
-- `mkdir build-release`
-- `cd build-release`
-- `cmake .. -DCMAKE_BUILD_TYPE=Release -DSPDLOG_SETUP_INCLUDE_UNIT_TESTS=ON -DCMAKE_INSTALL_PREFIX=install`
-- `cmake --build . --target install`
-
-Now the unit test executable should be compiled and residing in
-`build-release/spdlog_setup_unit_test`.
-
-The header files should be installed in `build-release/install/include`.
-
-### Windows (`MSVC2015` as Example)
-
-Ensure that [`Microsoft Build Tools 2015`](https://www.microsoft.com/en-sg/download/details.aspx?id=48159)
-and [`Visual C++ Build Tools 2015`](http://landinghub.visualstudio.com/visual-cpp-build-tools)
-(or `Visual Studio 2015`) have been installed.
-
-In the root directory after `git` cloning:
-
-- `mkdir build`
-- `cd build`
-- `cmake .. -G "Visual Studio 14 Win64" -DSPDLOG_SETUP_INCLUDE_UNIT_TESTS=ON -DCMAKE_INSTALL_PREFIX=install`
-- (Debug) `cmake --build . --config Debug`
-- (Release with installation) `cmake --build . --config Release --target install`
-
-Now the unit test executable should be compiled and residing in
-
-- (Debug) `build/Debug/spdlog_setup_unit_test.exe` or
-- (Release) `build/Release/spdlog_setup_unit_test.exe`.
-
-The header files should be installed in `build/install/include`.
+- `conan build -b mising .`
 
 ## Supported Sinks
 
@@ -391,7 +287,6 @@ level = "trace"
 
 ```c++
 #include <spdlog_setup/spdlog_setup.hpp>
-
 #include <iostream>
 #include <string>
 
@@ -422,7 +317,6 @@ int main() {
 
 ```c++
 #include <spdlog_setup/spdlog_setup.hpp>
-
 #include <string>
 
 int main(const int argc, const char * argv[]) {
@@ -475,23 +369,8 @@ all the source code files.
 Please try to run
 
 ```bash
-./run-clang-format.sh
+./reformat.sh
 ```
 
 which will pull the appropriate Docker image to run the formatting command over
 the entire repository directory.
-
-If your `docker` command requires `sudo`, then you will need to run it as
-
-```bash
-sudo sh ./run-clang-format.sh
-```
-
-Alternatively, you could also try to set up your own `clang-format` (currently
-this repository uses version 7), and run
-
-```bash
-clang-format -i path_to_h_cpp_file
-```
-
-over the changed files.

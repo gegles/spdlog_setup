@@ -4,9 +4,9 @@
  * @version 0.3.3-pre
  */
 
-#include <spdlog_setup/spdlog_setup.hpp>
 #include <catch2/catch_test_macros.hpp>
 #include <cpptoml.h>
+#include <spdlog_setup/spdlog_setup.hpp>
 
 static constexpr auto TEST_THREAD_POOL_NAME = "default";
 

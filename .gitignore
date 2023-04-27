@@ -4,8 +4,8 @@ build-*/
 log/
 .idea
 cmake-build-debug
-/CMakeUserPresets.json
-/conan.lock
-/conanbuildinfo.txt
-/conaninfo.txt
-/graph_info.json
+CMakeUserPresets.json
+conan.lock
+conanbuildinfo.txt
+conaninfo.txt
+graph_info.json

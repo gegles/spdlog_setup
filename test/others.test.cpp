@@ -4,10 +4,10 @@
  * @version 0.3.3-pre
  */
 
-#include <spdlog_setup/spdlog_setup.hpp>
 #include <catch2/catch_test_macros.hpp>
 #include <iostream>
 #include <iterator>
+#include <spdlog_setup/spdlog_setup.hpp>
 #include <string>
 #include <unordered_map>
 
@@ -520,25 +520,25 @@ TEST_CASE("Parse TOML file for set-up", "[from_file]")
   console_logger->error("Console Message - Error!");
 }
 
-//TEST_CASE("Parse pre-TOML file for set-up", "[from_file_with_tag_replacement]")
+// TEST_CASE("Parse pre-TOML file for set-up", "[from_file_with_tag_replacement]")
 //{
-//  spdlog::drop_all();
+//   spdlog::drop_all();
 //
-//  const auto tmp_file = examples::get_pre_conf_tmp_file();
+//   const auto tmp_file = examples::get_pre_conf_tmp_file();
 //
-//  spdlog_setup::from_file_with_tag_replacement(tmp_file.get_file_path(), arg("index", 123),
-//                                               arg("path", "spdlog_setup"));
+//   spdlog_setup::from_file_with_tag_replacement(tmp_file.get_file_path(), arg("index", 123),
+//                                                arg("path", "spdlog_setup"));
 //
-//  const auto root_logger = spdlog::get("root");
-//  REQUIRE(root_logger != nullptr);
+//   const auto root_logger = spdlog::get("root");
+//   REQUIRE(root_logger != nullptr);
 //
-//  root_logger->trace("Test Message - Trace!");
-//  root_logger->debug("Test Message - Debug!");
-//  root_logger->info("Test Message - Info!");
-//  root_logger->warn("Test Message - Warn!");
-//  root_logger->error("Test Message - Error!");
-//  root_logger->critical("Test Message - Critical!");
-//}
+//   root_logger->trace("Test Message - Trace!");
+//   root_logger->debug("Test Message - Debug!");
+//   root_logger->info("Test Message - Info!");
+//   root_logger->warn("Test Message - Warn!");
+//   root_logger->error("Test Message - Error!");
+//   root_logger->critical("Test Message - Critical!");
+// }
 
 TEST_CASE("Parse TOML file with override for set-up", "[from_file_with_override]")
 {
@@ -652,13 +652,13 @@ TEST_CASE("Parse TOML file that does not exist", "[from_file_no_such_file]")
   REQUIRE_THROWS_AS(spdlog_setup::from_file("config/no_such_file"), setup_error);
 }
 
-//TEST_CASE("Parse pre-TOML file that does not exist", "[from_file_with_tag_replacement_no_such_file]")
+// TEST_CASE("Parse pre-TOML file that does not exist", "[from_file_with_tag_replacement_no_such_file]")
 //{
 //
-//  spdlog::drop_all();
+//   spdlog::drop_all();
 //
-//  REQUIRE_THROWS_AS(spdlog_setup::from_file_with_tag_replacement("config/no_such_file"), setup_error);
-//}
+//   REQUIRE_THROWS_AS(spdlog_setup::from_file_with_tag_replacement("config/no_such_file"), setup_error);
+// }
 
 TEST_CASE("Save logger to new file", "[save_logger_to_file_new]")
 {

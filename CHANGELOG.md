@@ -2,7 +2,7 @@
 
 ## v1.1.0
 - Complete revamp
-- Conan support
+- Conan v2 support
 
 ## v0.3.2
 

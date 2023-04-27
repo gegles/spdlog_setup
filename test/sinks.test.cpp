@@ -4,8 +4,8 @@
  * @version 0.3.3-pre
  */
 
-#include <spdlog_setup/spdlog_setup.hpp>
 #include <catch2/catch_test_macros.hpp>
+#include <spdlog_setup/spdlog_setup.hpp>
 
 inline auto
 generate_stdout_sink_st() -> std::shared_ptr<cpptoml::table>

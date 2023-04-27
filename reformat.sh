@@ -5,7 +5,9 @@ set -e
 CLANG_FORMAT=mikedld/clang-format
 
 files=$(find \
-        spdlog_setup \
+        include \
+        test \
+        test_package \
         -type f \( \
                   -iname \*.cpp -o \
                   -iname \*.hpp -o \

@@ -123,7 +123,6 @@ from_file_and_override_with_tag_replacement(const std::string& base_pre_toml_pat
   using std::exception;
   using std::forward;
   using std::ifstream;
-  using std::move;
   using std::stringstream;
 
   try {

@@ -4,9 +4,9 @@
  * @version 0.3.3-pre
  */
 
-#include <spdlog_setup/spdlog_setup.hpp>
 #include <catch2/catch_test_macros.hpp>
 #include <memory>
+#include <spdlog_setup/spdlog_setup.hpp>
 #include <string>
 #include <typeinfo>
 #include <unordered_map>
