@@ -345,7 +345,7 @@ read_template_file_into_stringstream(std::stringstream& toml_ss, const std::stri
 
     const auto pre_toml_content = pre_toml_ss.str();
 
-    const auto toml_content = fmt::format(pre_toml_content, std::forward<Ps>(ps)...);
+    const auto toml_content = fmt::format(fmt::runtime(pre_toml_content), std::forward<Ps>(ps)...);
 
     toml_ss << toml_content;
   } catch (const exception& e) {
