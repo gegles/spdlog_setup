@@ -12,7 +12,7 @@ required_conan_version = ">=1.52.0"
 
 class SpdlogSetupConan(ConanFile):
     name = "spdlog_setup"
-    version = "1.1.0"
+    version = "1.1.1"
     description = "Setup spdlog via a TOML config file"
     license = "MIT"
     url = "https://github.com/conan-io/conan-center-index"
@@ -20,14 +20,14 @@ class SpdlogSetupConan(ConanFile):
     topics = ('spdlog', 'logging', 'header-only', 'TOML', 'cpptoml')
     package_type = "header-library"
     settings = "os", "arch", "compiler", "build_type"
-    exports_sources = "include/*", "test/*", "CMakeLists.txt"
+    exports_sources = "include/*", "test/*", "CMakeLists.txt", "cmake/*", "LICENSE"
     no_copy_source = True
     default_options = {"fmt/*:header_only": True,
                        "spdlog/*:header_only": True}
 
     @property
     def _min_cppstd(self):
-        return 17
+        return 14
 
     @property
     def _compilers_minimum_version(self):
@@ -43,12 +43,12 @@ class SpdlogSetupConan(ConanFile):
         cmake_layout(self)
 
     def build_requirements(self):
-        self.test_requires("catch2/3.3.2")
+        self.test_requires("catch2/3.6.0")
 
     def requirements(self):
-        self.requires("cpptoml/0.1.1", transitive_headers=True)
-        self.requires("spdlog/1.11.0", transitive_headers=True, transitive_libs=True)
-        self.requires("fmt/9.1.0", transitive_headers=True, transitive_libs=True)
+        self.requires("cpptoml/0.1.1")
+        self.requires("spdlog/1.14.1")
+        self.requires("fmt/10.2.1")
 
     def package_id(self):
         self.info.clear()
