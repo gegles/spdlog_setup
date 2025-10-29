@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 project(spdlog_setup
     LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -13,7 +13,15 @@ find_package(cpptoml REQUIRED CONFIG)
 # spdlog_setup
 add_library(spdlog_setup INTERFACE)
 target_include_directories(spdlog_setup INTERFACE include)
-target_link_libraries(spdlog_setup INTERFACE spdlog::spdlog cpptoml)
+
+# Link to spdlog - use whichever target is available
+if(TARGET spdlog::spdlog)
+    target_link_libraries(spdlog_setup INTERFACE spdlog::spdlog cpptoml)
+elseif(TARGET spdlog::spdlog_header_only)
+    target_link_libraries(spdlog_setup INTERFACE spdlog::spdlog_header_only cpptoml)
+else()
+    message(FATAL_ERROR "Neither spdlog::spdlog nor spdlog::spdlog_header_only target found")
+endif()
 
 # Conditionally find and link fmt library
 # When not using std::format, we need the fmt library

@@ -61,6 +61,12 @@ class SpdlogSetupConan(ConanFile):
         if not self.options.use_std_fmt:
             self.requires("fmt/[>=10 <=12]")
 
+    def configure(self):
+        # Configure spdlog to be header-only to match this library's nature
+        self.options["spdlog"].header_only = True
+        # Match spdlog's use_std_fmt with our own
+        self.options["spdlog"].use_std_fmt = self.options.use_std_fmt
+
     def build_requirements(self):
         if not self.conf.get("tools.build:skip_test", default=False):
             self.test_requires("catch2/3.11.0")
