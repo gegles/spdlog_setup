@@ -7,6 +7,7 @@
 #pragma once
 
 #include <spdlog_setup/details/conf_impl.hpp>
+#include <spdlog_setup/details/fmt.hpp>
 #include <spdlog_setup/details/template_impl.hpp>
 #include <spdlog_setup/setup_error.hpp>
 
@@ -232,7 +233,7 @@ save_logger_to_file(const std::shared_ptr<spdlog::logger>& logger, const std::st
     })();
 
     if (!config) {
-      throw setup_error(fmt::format("Unable to parse file at '{}' for saving", toml_path));
+      throw setup_error(spdlog_setup::fmt::format("Unable to parse file at '{}' for saving", toml_path));
     }
 
     auto& config_ref = *config;
@@ -298,14 +299,14 @@ delete_logger_in_file(const std::string& logger_name, const std::string& toml_pa
     const auto config = cpptoml::parse_file(toml_path);
 
     if (!config) {
-      throw setup_error(fmt::format("Unable to parse file at '{}' for deleting logger '{}'", toml_path, logger_name));
+      throw setup_error(spdlog_setup::fmt::format("Unable to parse file at '{}' for deleting logger '{}'", toml_path, logger_name));
     }
 
     const auto& config_ref   = *config;
     const auto  curr_loggers = config_ref.get_table_array(LOGGER_TABLE);
 
     if (!curr_loggers) {
-      throw setup_error(fmt::format("Unable to find any logger table array for file at '{}'", toml_path));
+      throw setup_error(spdlog_setup::fmt::format("Unable to find any logger table array for file at '{}'", toml_path));
     }
 
     auto& curr_loggers_ref = *curr_loggers;
