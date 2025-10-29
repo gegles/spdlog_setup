@@ -63,7 +63,7 @@ class SpdlogSetupConan(ConanFile):
 
     def build_requirements(self):
         if not self.conf.get("tools.build:skip_test", default=False):
-            self.test_requires("catch2/3.8.0")
+            self.test_requires("catch2/3.11.0")
 
     def package_id(self):
         self.info.clear()
