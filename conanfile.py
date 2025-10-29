@@ -80,6 +80,7 @@ class SpdlogSetupConan(ConanFile):
     def generate(self):
         if not self.conf.get("tools.build:skip_test", default=False):
             tc = CMakeToolchain(self)
+            tc.variables["SPDLOG_SETUP_USE_STD_FORMAT"] = self.options.use_std_fmt
             tc.generate()
             deps = CMakeDeps(self)
             deps.generate()

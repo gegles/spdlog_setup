@@ -8,13 +8,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(spdlog REQUIRED CONFIG)
-find_package(fmt REQUIRED CONFIG)
 find_package(cpptoml REQUIRED CONFIG)
 
 # spdlog_setup
 add_library(spdlog_setup INTERFACE)
 target_include_directories(spdlog_setup INTERFACE include)
-target_link_libraries(spdlog_setup INTERFACE spdlog::spdlog cpptoml fmt::fmt)
+target_link_libraries(spdlog_setup INTERFACE spdlog::spdlog cpptoml)
+
+# Conditionally find and link fmt library
+# When not using std::format, we need the fmt library
+if(NOT SPDLOG_SETUP_USE_STD_FORMAT)
+    find_package(fmt REQUIRED CONFIG)
+    target_link_libraries(spdlog_setup INTERFACE fmt::fmt)
+endif()
 
 # spdlog_setup_sources (for IDEs)
 if (XCODE OR MSVC)
