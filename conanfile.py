@@ -11,7 +11,7 @@ required_conan_version = ">=1.52.0"
 
 
 class SpdlogSetupConan(ConanFile):
-    name = "gegles-spdlog_setup"
+    name = "spdlog_setup"
     version = "1.2.0"
     description = "Setup spdlog via a TOML config file"
     license = "MIT"
@@ -114,8 +114,3 @@ class SpdlogSetupConan(ConanFile):
 
         if self.options.use_std_fmt:
             self.cpp_info.defines.append("SPDLOG_SETUP_USE_STD_FORMAT")
-
-        # TODO: to remove in conan v2 once cmake_find_package_* generators removed
-        # This is needed since we prefixed the package name with the author name
-        self.cpp_info.names["cmake_find_package"] = "SPDLOG_SETUP"
-        self.cpp_info.names["cmake_find_package_multi"] = "spdlog_setup"
